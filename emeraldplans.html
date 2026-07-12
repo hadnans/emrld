@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>باقات إيمرالد - Emerald Plans</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;700;900&family=Tajawal:wght@400;500;700;900&display=swap');
+
+    :root{
+        --bg-0: #06140f;
+        --bg-1: #0d2a20;
+        --surface: rgba(212, 233, 224, 0.05);
+        --surface-line: rgba(212, 233, 224, 0.12);
+        --emerald: #0f8a58;
+        --emerald-light: #3fb884;
+        --emerald-deep: #063d28;
+        --gold: #d4af6a;
+        --gold-light: #f0d9a3;
+        --cream: #f2ece1;
+        --muted: #93ab9f;
+
+        /* Per-tier gem tones */
+        --sapphire: #2a6fb0;
+        --sapphire-light: #6fb3e0;
+        --sapphire-deep: #123a5c;
+
+        --amethyst: #8a4fc4;
+        --amethyst-light: #c79bec;
+        --amethyst-deep: #3d1f63;
+        --rose-gold: #e8b4a0;
+    }
+
+    *{ box-sizing: border-box; margin: 0; padding: 0; }
+
+    body{
+        font-family: 'Tajawal', sans-serif;
+        background:
+            radial-gradient(ellipse 80% 60% at 50% -10%, rgba(63,184,132,0.16), transparent),
+            linear-gradient(160deg, var(--bg-0) 0%, var(--bg-1) 55%, var(--bg-0) 100%);
+        color: var(--cream);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 56px 20px 40px;
+    }
+
+    .container{ max-width: 1080px; width: 100%; }
+
+    /* ---------- Header ---------- */
+    .header{ text-align: center; margin-bottom: 56px; }
+
+    .gem-mark{
+        width: 46px; height: 46px;
+        margin: 0 auto 18px;
+        clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
+        background: linear-gradient(155deg, var(--gold-light), var(--gold) 45%, var(--emerald-light) 55%, var(--emerald) 100%);
+    }
+
+    .title{
+        font-family: 'El Messiri', sans-serif;
+        font-size: clamp(2.4rem, 6vw, 3.6rem);
+        font-weight: 900;
+        letter-spacing: 1px;
+        background: linear-gradient(100deg, var(--gold-light) 0%, var(--gold) 35%, var(--emerald-light) 70%, var(--emerald) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 12px;
+    }
+
+    .subtitle{
+        font-size: 1.15rem;
+        color: var(--muted);
+        font-weight: 400;
+        letter-spacing: 0.3px;
+    }
+
+    /* ---------- Grid & Cards ---------- */
+    .grid{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 22px;
+        margin-bottom: 48px;
+    }
+
+    .card{
+        background: var(--surface);
+        border: 1px solid var(--surface-line);
+        border-radius: 18px;
+        padding: 38px 24px 30px;
+        text-align: center;
+        position: relative;
+        backdrop-filter: blur(8px);
+    }
+
+    .card-popular{
+        border-color: rgba(212, 175, 106, 0.45);
+        background: linear-gradient(180deg, rgba(212,175,106,0.08), rgba(255,255,255,0.03));
+    }
+
+    .card-pro{
+        border-color: rgba(111, 179, 224, 0.4);
+        background: linear-gradient(180deg, rgba(42,111,176,0.08), rgba(255,255,255,0.03));
+    }
+
+    .card-max{
+        border-color: rgba(199, 155, 236, 0.5);
+        background: linear-gradient(180deg, rgba(138,79,196,0.10), rgba(255,255,255,0.03));
+        box-shadow: 0 18px 40px rgba(138, 79, 196, 0.16);
+    }
+
+    .badge{
+        position: absolute;
+        top: 0;
+        right: 50%;
+        transform: translate(50%, -50%);
+        background: linear-gradient(120deg, var(--gold-light), var(--gold));
+        color: var(--bg-0);
+        padding: 6px 22px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border-radius: 999px;
+        white-space: nowrap;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    }
+
+    .badge-max{
+        background: linear-gradient(120deg, var(--rose-gold), var(--amethyst));
+        color: #1a0f2b;
+    }
+
+    .plan-name{
+        font-family: 'El Messiri', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--cream);
+        margin-bottom: 26px;
+    }
+
+    /* ---------- Faceted gem price display ---------- */
+    .gem{
+        position: relative;
+        width: 122px;
+        height: 122px;
+        margin: 0 auto 30px;
+        clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+        background: linear-gradient(155deg, var(--emerald-light) 0%, var(--emerald) 55%, var(--emerald-deep) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-popular .gem{
+        background: linear-gradient(155deg, var(--gold-light) 0%, var(--gold) 55%, #8a6a34 100%);
+    }
+
+    .card-pro .gem{
+        background: linear-gradient(155deg, var(--sapphire-light) 0%, var(--sapphire) 55%, var(--sapphire-deep) 100%);
+    }
+
+    .card-max .gem{
+        background: linear-gradient(155deg, var(--rose-gold) 0%, var(--amethyst) 55%, var(--amethyst-deep) 100%);
+    }
+
+    .gem::before{
+        /* facet highlight */
+        content: '';
+        position: absolute;
+        inset: 0;
+        clip-path: polygon(50% 0%, 93% 25%, 50% 50%, 7% 25%);
+        background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    }
+
+    .gem::after{
+        /* lower facet shade */
+        content: '';
+        position: absolute;
+        inset: 0;
+        clip-path: polygon(7% 75%, 50% 50%, 93% 75%, 50% 100%);
+        background: linear-gradient(0deg, rgba(0,0,0,0.28), rgba(0,0,0,0));
+    }
+
+    .gem-inner{ position: relative; z-index: 1; color: var(--bg-0); }
+
+    .price-val{ font-size: 2rem; font-weight: 900; line-height: 1; display: block; }
+    .price-curr{ font-size: 0.85rem; font-weight: 700; display: block; margin-top: 4px; }
+
+    .features{ list-style: none; margin-bottom: 6px; }
+
+    .features li{
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin-bottom: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .features li strong{ color: var(--cream); font-weight: 700; }
+
+    .features li::before{
+        content: '✓';
+        color: var(--emerald-light);
+        font-weight: bold;
+    }
+
+    .card-popular .features li::before{ color: var(--gold); }
+    .card-pro .features li::before{ color: var(--sapphire-light); }
+    .card-max .features li::before{ color: var(--rose-gold); }
+
+    /* ---------- Footer ---------- */
+    .footer{
+        background: var(--surface);
+        border: 1px solid var(--surface-line);
+        border-radius: 18px;
+        padding: 32px 24px;
+        text-align: center;
+    }
+
+    .footer-text{
+        font-family: 'El Messiri', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--cream);
+        margin-bottom: 20px;
+    }
+
+    .numbers{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+
+    .numbers a{
+        direction: ltr;
+        font-size: 1.3rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        color: var(--bg-0);
+        text-decoration: none;
+        background: linear-gradient(120deg, var(--gold-light), var(--gold));
+        padding: 10px 22px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(212, 175, 106, 0.18);
+    }
+
+    .divider{
+        border: none;
+        border-top: 1px solid var(--surface-line);
+        margin: 26px 0 22px;
+    }
+
+    .icons-row{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .icon{
+        font-size: 0.95rem;
+        font-weight: 700;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--surface-line);
+        padding: 9px 18px;
+        border-radius: 10px;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 480px){
+        .badge{ font-size: 0.75rem; padding: 5px 16px; }
+        .numbers a{ font-size: 1.1rem; padding: 9px 18px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="gem-mark"></div>
+        <h1 class="title">Emerald Plans</h1>
+        <p class="subtitle">باقات إيمرالد الحصرية — سرعة وثبات بلا حدود</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h2 class="plan-name">إيمرالد ستارت</h2>
+            <div class="gem">
+                <span class="gem-inner">
+                    <span class="price-val">370</span>
+                    <span class="price-curr">جنيهاً</span>
+                </span>
+            </div>
+            <ul class="features">
+                <li><strong>20,000</strong> ميجابايت</li>
+                <li><strong>1,000</strong> دقيقة</li>
+                <li><strong>200</strong> رسالة</li>
+                <li><strong>10</strong> دقائق دولي</li>
+            </ul>
+        </div>
+
+        <div class="card card-popular">
+            <div class="badge">الأكثر طلباً</div>
+            <h2 class="plan-name">إيمرالد بلس</h2>
+            <div class="gem">
+                <span class="gem-inner">
+                    <span class="price-val">480</span>
+                    <span class="price-curr">جنيهاً</span>
+                </span>
+            </div>
+            <ul class="features">
+                <li><strong>30,000</strong> ميجابايت</li>
+                <li><strong>1,500</strong> دقيقة</li>
+                <li><strong>250</strong> رسالة</li>
+                <li><strong>12</strong> دقيقة دولي</li>
+            </ul>
+        </div>
+
+        <div class="card card-pro">
+            <h2 class="plan-name">إيمرالد برو</h2>
+            <div class="gem">
+                <span class="gem-inner">
+                    <span class="price-val">640</span>
+                    <span class="price-curr">جنيهاً</span>
+                </span>
+            </div>
+            <ul class="features">
+                <li><strong>40,000</strong> ميجابايت</li>
+                <li><strong>2,000</strong> دقيقة</li>
+                <li><strong>300</strong> رسالة</li>
+                <li><strong>15</strong> دقيقة دولي</li>
+            </ul>
+        </div>
+
+        <div class="card card-max">
+            <div class="badge badge-max">الفئة الأعلى</div>
+            <h2 class="plan-name">إيمرالد ماكس</h2>
+            <div class="gem">
+                <span class="gem-inner">
+                    <span class="price-val">760</span>
+                    <span class="price-curr">جنيهاً</span>
+                </span>
+            </div>
+            <ul class="features">
+                <li><strong>50,000</strong> ميجابايت</li>
+                <li><strong>2,500</strong> دقيقة</li>
+                <li><strong>350</strong> رسالة</li>
+                <li><strong>17</strong> دقيقة دولي</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p class="footer-text">الدفع بعد التفعيل لضمان حقك</p>
+
+        <div class="numbers">
+            <a href="tel:+201144305813">01144305813</a>
+            <a href="tel:+201125211911">01125211911</a>
+            <a href="tel:+201007452159">01007452159</a>
+        </div>
+
+        <hr class="divider">
+
+        <div class="icons-row">
+            <span class="icon">📺 شاهد VIP</span>
+            <span class="icon">⚽ beIN Sports</span>
+            <span class="icon">▶️ YouTube</span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
